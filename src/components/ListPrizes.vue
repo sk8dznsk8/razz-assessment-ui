@@ -29,8 +29,7 @@ export default {
     data() {
         return {
             name: 'ListPrizes',
-            prizes: [],
-            doneLoading: false
+            prizes: []
         };
     },
     created: function() {
@@ -38,8 +37,10 @@ export default {
         this.busRefreshPrizes();
     },
     methods: {
-        async getPrizes() {
-            this.prizes =  (await axios.get(process.env.VUE_APP_BACKEND_APP + '/prizes')).data;
+        getPrizes() {
+            axios.get(process.env.VUE_APP_BACKEND_APP + '/prizes').then(result => {
+                this.prizes = result.data;
+            });
         },
         openPrizeDetails(prize) {
             this.$router.push({ name:'PrizeDetail', params: { id: prize._id } });
@@ -47,7 +48,6 @@ export default {
         },
         busRefreshPrizes() {
             bus.$once("refreshPrizes", () => {
-                console.log('Received emit');
                 this.getPrizes();
             });
         }
