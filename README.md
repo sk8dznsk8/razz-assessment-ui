@@ -1,4 +1,4 @@
-# vue-js-first-app
+# Razz Assessment UI
 
 ## Project setup
 ```
