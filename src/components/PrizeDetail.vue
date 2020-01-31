@@ -8,9 +8,9 @@
                 <div class="col-lg-6 col-sm-12 left">
                     <b-card :title="prize.name" class="redeem-card">
                         <hr>
-                        <b-button variant="warning" class="redeem" pill v-b-modal.modal-redeem>Redeem ></b-button>
+                        <b-button v-bind:disabled="prize.quantity <= 0" variant="warning" class="redeem" pill v-b-modal.modal-redeem>Redeem ></b-button>
                         <hr>
-                        <div class="stock">{{ prize.quantity }} left in stock</div>
+                        <div class="stock">{{ prize.quantity | stockMessage }}</div>
                     </b-card>
                 </div>
                 <b-modal id="modal-redeem" centered hide-header hide-footer>
@@ -26,6 +26,13 @@
                     <div class="center">
                         <h5>Congratulations!</h5>
                         <p>You redeemed {{ prize.name }}.</p>
+                        <b-button class="modal-btn" variant="warning" pill v-on:click="goToListPrizes()">More Prizes</b-button>
+                    </div>
+                </b-modal>
+                <b-modal id="modal-out-stock" centered hide-header hide-footer>
+                    <div class="center">
+                        <h5>Sorry!</h5>
+                        <p>We ran out of {{ prize.name }} coupons.</p>
                         <b-button class="modal-btn" variant="warning" pill v-on:click="goToListPrizes()">More Prizes</b-button>
                     </div>
                 </b-modal>
@@ -69,7 +76,20 @@ export default {
                     this.prize.quantity--;
                     this.$bvModal.hide('modal-redeem');
                     this.$bvModal.show('modal-redeemed');
+                })
+                .catch(() => {
+                    this.$bvModal.hide('modal-redeem');
+                    this.$bvModal.show('modal-out-stock');
                 });
+        }
+    },
+    filters: {
+        stockMessage(value) {
+            if(value <= 0) {
+                return 'Out of stock';
+            } else {
+                return value + ' left in stock';
+            }
         }
     }
 };
