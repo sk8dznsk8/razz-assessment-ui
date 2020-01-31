@@ -53,7 +53,7 @@ export default {
         };
     },
     created() {
-        axios.get('http://localhost:4000/prizes/' + this.id)
+        axios.get(process.env.VUE_APP_BACKEND_APP + '/prizes/' + this.id)
             .then(result => {
                 this.prize = result.data;
             });
@@ -64,8 +64,7 @@ export default {
             bus.$emit('refreshPrizes');
         },
         redeem() {
-            //Mongo operation
-            axios.patch('http://localhost:4000/prizes/decrement/' + this.id)
+            axios.patch(process.env.VUE_APP_BACKEND_APP + '/prizes/decrement/' + this.id)
                 .then(() => {
                     this.prize.quantity--;
                     this.$bvModal.hide('modal-redeem');

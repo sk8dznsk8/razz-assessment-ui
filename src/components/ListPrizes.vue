@@ -39,7 +39,7 @@ export default {
     },
     methods: {
         async getPrizes() {
-            this.prizes =  (await axios.get('http://localhost:4000/prizes')).data;
+            this.prizes =  (await axios.get(process.env.VUE_APP_BACKEND_APP + '/prizes')).data;
         },
         openPrizeDetails(prize) {
             this.$router.push({ name:'PrizeDetail', params: { id: prize._id } });
