@@ -18,7 +18,7 @@
                   <b-form-input class="modal-control" v-model="name" placeholder="Enter your name"></b-form-input>
                   <b-form-input class="modal-control" v-model="email" type="email" placeholder="Enter your email"></b-form-input>
                   <b-form-input class="modal-control" v-model="password" type="password" placeholder="Enter your password"></b-form-input>
-                  <b-button class="modal-btn" variant="warning" pill v-on:keyup.enter="signup()" v-on:click="signup()">Sign up</b-button>
+                  <b-button class="modal-btn" variant="warning" pill v-on:click="signup()">Sign up</b-button>
                   <b-button class="modal-btn" variant="outline-secondary" pill v-on:click="$bvModal.hide('modal-signup')">Cancel</b-button>
                   <div v-if="modalErrorMessage">
                     <b-badge class="pending-login" pill variant="danger">
@@ -32,7 +32,7 @@
                   <h5>Welcome back!</h5>
                   <b-form-input class="modal-control" v-model="email" type="email" placeholder="Enter your email"></b-form-input>
                   <b-form-input class="modal-control" v-model="password" type="password" placeholder="Enter your password"></b-form-input>
-                  <b-button class="modal-btn" variant="warning" pill v-on:keyup.enter="login()" v-on:click="login()">Log in</b-button>
+                  <b-button class="modal-btn" variant="warning" pill v-on:click="login()">Log in</b-button>
                   <b-button class="modal-btn" variant="outline-secondary" pill v-on:click="$bvModal.hide('modal-login')">Cancel</b-button>
                   <div v-if="modalErrorMessage">
                     <b-badge class="pending-login" pill variant="danger">
