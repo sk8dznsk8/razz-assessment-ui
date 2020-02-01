@@ -3,10 +3,10 @@ export default {
         localStorage.removeItem(process.env.VUE_APP_CACHE_ID);
     },
     get() {
-        localStorage.getItem(process.env.VUE_APP_CACHE_ID);
+        return localStorage.getItem(process.env.VUE_APP_CACHE_ID);
     },
     set(value) {
-        this.cleanCache();
+        this.clean();
         localStorage.setItem(process.env.VUE_APP_CACHE_ID, value);
     }
 }
